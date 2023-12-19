@@ -1,7 +1,11 @@
-import React from "react";
+import Render from "./Render";
 
 const App = () => {
-  return <div>Basic Pursuit React Starter</div>;
+  return (
+    <>
+      <Render />
+    </>
+  );
 };
 
 export default App;
