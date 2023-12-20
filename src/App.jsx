@@ -1,9 +1,9 @@
-import Render from "./Render";
+import Practical from "./Practical";
 
 const App = () => {
   return (
     <>
-      <Render />
+      <Practical />
     </>
   );
 };
