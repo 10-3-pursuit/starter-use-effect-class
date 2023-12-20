@@ -13,6 +13,7 @@ const Practical = () => {
 
   // this function declaration has been abstracted because I will use it twice
   const getData = (num) => {
+    console.log("getData function ran");
     fetch(`https://randomuser.me/api/?results=${num}`)
       .then((res) => res.json())
       .then((data) => {
@@ -22,17 +23,21 @@ const Practical = () => {
   };
 
   const handleChange = (e) => {
+    console.log("handleChange function ran");
     setNumUsers(e.target.value);
   };
 
   // this will fetch the users with the updated numUsers variable
   const handleSubmit = (e) => {
+    console.log("handleSubmit function ran");
     e.preventDefault();
+    console.log("getData function invoked");
     getData(numUsers);
   };
 
   // this useEffect will run once and store the quote in state
   useEffect(() => {
+    console.log("fetch quote useEffect ran");
     fetch("https://api.quotable.io/random")
       .then((res) => res.json())
       .then((data) => setQuote(data));
@@ -40,21 +45,28 @@ const Practical = () => {
 
   // I want to get the number of users from localStorage if that number exists - this will run one time
   useEffect(() => {
+    console.log("local storage getItem useEffect ran");
     const numGetUsers = window.localStorage.getItem("userLength") || numUsers;
+    console.log("getData function invoked");
     getData(JSON.parse(numGetUsers));
   }, []);
 
   // Each time I update the number of users, I want to store that number in localStarage - this will run every time users is updated
   useEffect(() => {
+    console.log("local storage setItem useEffect ran");
     //this is storing the number of users in the variable userLength
     window.localStorage.setItem("userLength", JSON.stringify(users.length));
   }, [users]);
 
   // on the first render there will be no users so the page remains blank
-  if (users.length === 0) return null;
+  if (users.length === 0) {
+    console.log("JSX rendered for the first time");
+    return null;
+  }
 
   return (
     <div className="wrapper">
+      {console.log("JSX rendered or re-rendered")}
       <header>
         <h1>Practical Component</h1>
         <h3>
